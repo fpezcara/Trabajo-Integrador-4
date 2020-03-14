@@ -1,4 +1,5 @@
-fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`)
+const mostrarUsuarios = () => { 
+  fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`)
   .then(data => data.json())
   .then(respuesta => {
     const baseDeDatosContactos = document.querySelector("#informacion-contactos");
@@ -26,6 +27,7 @@ fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`)
 
     baseDeDatosContactos.innerHTML = mostrarUsuarios;
   });
+}
 
 const addEmployeeButton = document.querySelector("#add-employee");
 const modalAddEmployee = document.querySelector(
@@ -104,6 +106,7 @@ const abrirAddEmployee = (addEmployeeButton.onclick = () => {
     .then(data => {
       console.log(data)
       modalAddEmployee.classList.add("nomostrar")
+      mostrarUsuarios()
     })
   });
 
