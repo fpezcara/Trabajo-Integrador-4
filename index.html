@@ -16,8 +16,9 @@
             <div id="header">
                 <h2><span>Manage </span>Employees</h2>
             </div>
-            <div id="add-employee">
-                <a id="modal-add-usuario">
+             <div id="add-employee">
+                <a id="modal-add-usuario-container">
+                    
                     <i class="material-icons">&#xE147;</i>
                     <span>Add New Employee</span>
                 </a>
@@ -32,6 +33,7 @@
             <div id="base-de-datos">
                 <table>
                     <tbody>
+                        <div>
                         <tr>
                             <th><span id="checkbox"><input type="checkbox"></span></th>
                             <th>Name</th>
@@ -40,15 +42,20 @@
                             <th>Phone</th>
                             <th>Actions</th>
                         </tr>
+                    </div>
+                        <!-- <div id="detalle-usuarios-tabla"> -->
                         <tr id="informacion-contactos">
                             
                         </tr>
+                    <!-- </div> -->
                     </tbody>
 
                 </table>
             </div>
         </div>
     </div>
+
+    <div id="modal-add-employee-container"></div>
     <script src="main.js"></script>
 </body>
 

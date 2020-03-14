@@ -160,7 +160,8 @@ border-top: 1px solid #ddd;
 
 #header-modal-add-employee {
     display: flex;
-    background-color: #ecf0f1;        
+    background-color: #ecf0f1;
+    padding: 20px 30px;        
 }
 
 #header-modal-add-employee h4 {
@@ -172,13 +173,18 @@ border-top: 1px solid #ddd;
 #close {
     position: absolute;
     right: 0px;
-    top: 20px;
+    top: 28px;
     border: none;
     font-size: 21px;
     line-height: 1;
     font-weight: 600;
     opacity: .2;
+    padding: 20px 30px;
     
+}
+
+#body-modal-add-employee {
+    padding: 20px 30px;
 }
 
 #name-body-add-employee {
@@ -194,7 +200,7 @@ border-top: 1px solid #ddd;
 #address-body-add-employee {
     display: flex;
     flex-direction: column;
-}
+    }
 
 #phone-body-add-employee {
     display: flex;
@@ -207,6 +213,32 @@ border-top: 1px solid #ddd;
     justify-content: flex-end;
     border-radius: 0 0 3px 3px;
     border-top: 1px solid #e5e5e5;
+    padding: 20px 30px;
+}
+
+.container-input-add-employee{
+    width: 100%;
+    margin: 10px 20px 30px 10px;
+    
+}
+
+#modal-add-employee {
+  width:400px;
+  height: auto;
+  position: fixed;
+  top: 40px;
+  left: 400px;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  color: #435d7d;
+    
+    }
+
+#modal-add-employee-container {
+    background-color: rgba(0,0,0,0.7);
+    opacity: 1;
+    width: 100%;
 }
 
 .button {
@@ -229,3 +261,8 @@ border-top: 1px solid #ddd;
     margin-left: 8px;
 
 }
+
+.nomostrar {
+    display: none;
+  }
+
