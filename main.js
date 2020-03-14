@@ -1,9 +1,8 @@
-const mostrarUsuarios = () => { 
   fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`)
   .then(data => data.json())
   .then(respuesta => {
     const baseDeDatosContactos = document.querySelector("#informacion-contactos");
-
+    console.log(respuesta)
     let datosUsuarios = ``
     const mostrarUsuarios = respuesta.map(usuario => {
       return datosUsuarios += `
@@ -27,7 +26,7 @@ const mostrarUsuarios = () => {
 
     baseDeDatosContactos.innerHTML = mostrarUsuarios;
   });
-}
+
 
 const addEmployeeButton = document.querySelector("#add-employee");
 const modalAddEmployee = document.querySelector(
@@ -77,10 +76,7 @@ const abrirAddEmployee = (addEmployeeButton.onclick = () => {
   const addressTextarea = document.querySelector("#textarea-address");
   const phoneInput = document.querySelector("#input-phone");
 
-  // addButton.onclick = e => {
-
-  //   }
-  // }
+ 
 
   const form = document.querySelector("#formulario-add-employee");
   const addNewUser = (form.onsubmit = e => {
@@ -106,7 +102,7 @@ const abrirAddEmployee = (addEmployeeButton.onclick = () => {
     .then(data => {
       console.log(data)
       modalAddEmployee.classList.add("nomostrar")
-      mostrarUsuarios()
+      
     })
   });
 
@@ -117,43 +113,21 @@ const abrirAddEmployee = (addEmployeeButton.onclick = () => {
   closeButton.onclick = () => {
     modalAddEmployee.classList.add("nomostrar");
   };
-  addButton.onkey = e => {
+  addButton.onkeypress = e => {
     if (e.keyCode == 13) {
       addNewUser()
       }
   };
 });
 
-// fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`, {
-//     method: 'POST',
-//     body: JSON.stringify({
+// let inputUsuario = '';
 
-//     })
+// const filtrarUsuarios = document.querySelector('#buscar')
 
-// })
-// .then(data => data.json())
-// .then(respuesta => {
-//     const baseDeDatosContactos = document.querySelector('#informacion-contactos')
-//     const mostrarUsuarios = respuesta.map( usuario=> {
-//         return `
-//         <td><input type="checkbox"></td>
-//         <td>${usuario.fullname}</td>
-//         <td>${usuario.email}</td>
-//         <td>${usuario.address}</td>
-//         <td>${usuario.phone}</td>
-//         <td>
-//             <a href="" class="edit">
-//                 <i class="material-icons" title="Edit">&#xE254;</i>
-//             </a>
-//             <a href="" class="delete">
-//                 <i class="material-icons" title="Delete">&#xE872;</i>
-//             </a>
-//         </td>
-//         `
-//     })
+// filtrarUsuarios.onchange = e => {
+//   inputUsuario = e.srcElement.value;
+//   return inputUsuario
+// }
 
-//     baseDeDatosContactos.innerHTML = mostrarUsuarios;
-//     console.log(respuesta)
-// })}
+// console.log(inputUsuario)
 
-// modal-agregar-usuario
