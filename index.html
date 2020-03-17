@@ -2,61 +2,57 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Integrador 4</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Integrador 4</title>
 </head>
 
 <body>
-    <div id="container">
-        <div id="barra-nav">
-            <div id="header">
-                <h2><span>Manage </span>Employees</h2>
-            </div>
-             <div id="add-employee">
-                <a id="modal-add-usuario-container">
-                    
-                    <i class="material-icons">&#xE147;</i>
-                    <span>Add New Employee</span>
-                </a>
-            </div>
-        </div>
-        <div id="filter-container">
-            <div id="filter">
-                <input type="text" name="" id="buscar" placeholder="Filter..." />
-            </div>
-        </div>
-        <div id="base-de-datos-container">
-            <div id="base-de-datos">
-                <table>
-                    <tbody>
-                        <div>
-                        <tr>
-                            <th><span id="checkbox"><input type="checkbox"></span></th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Actions</th>
-                        </tr>
-                    </div>
-                        <!-- <div id="detalle-usuarios-tabla"> -->
-                        <tr id="informacion-contactos">
-                            
-                        </tr>
-                    <!-- </div> -->
-                    </tbody>
-
-                </table>
-            </div>
-        </div>
+  <div id="container">
+    <div id="barra-nav">
+      <div id="header">
+        <h2><span>Manage </span>Employees</h2>
+      </div>
+      <div id="add-employee">
+        <a id="modal-add-usuario-container">
+          <i class="material-icons">&#xE147;</i>
+          <span>Add New Employee</span>
+        </a>
+      </div>
     </div>
+    <div id="filter-container">
+      <div id="filter">
+        <form id="form-filtrar-usuarios" action="">
+          <input type="text" name="" id="buscar" placeholder="Filter..." />
+          <input type="submit" value="">
+        </form>
+      </div>
+    </div>
+    <div id="base-de-datos-container">
+      <div id="base-de-datos">
+        <table>
+          <thead>
+            <tr>
+              <th><span id="checkbox"><input type="checkbox"></span></th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="informacion-contactos">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-    <div id="modal-add-employee-container"></div>
-    <script src="main.js"></script>
+  <div id="modal-add-employee-container"></div>
+  <script src="main.js"></script>
 </body>
 
 </html>

@@ -6,7 +6,7 @@
     let datosUsuarios = ``
     const mostrarUsuarios = respuesta.map(usuario => {
       return datosUsuarios += `
-      <div id="detalle-usuarios">
+      <tr id="detalle-usuarios">
         <td><input type="checkbox"></td>
         <td>${usuario.fullname}</td>
         <td>${usuario.email}</td>
@@ -20,11 +20,12 @@
                 <i class="material-icons" title="Delete">&#xE872;</i>
             </a>
         </td> 
-      </div>
+      </tr>
         `;
     });
 
     baseDeDatosContactos.innerHTML = mostrarUsuarios;
+    
   });
 
 
@@ -101,8 +102,8 @@ const abrirAddEmployee = (addEmployeeButton.onclick = () => {
     .then(res => res.json())
     .then(data => {
       console.log(data)
-      modalAddEmployee.classList.add("nomostrar")
-      
+      modalAddEmployee.classList.add("nomostrar") 
+      // mostrarUsuarios()     
     })
   });
 
@@ -120,14 +121,26 @@ const abrirAddEmployee = (addEmployeeButton.onclick = () => {
   };
 });
 
-// let inputUsuario = '';
+const formFiltrar = document.forms[0]
+const submit = formFiltrar.elements[0];
+let inputUsuario = '';
 
-// const filtrarUsuarios = document.querySelector('#buscar')
+formFiltrar.onsubmit = e => {
+  e.preventDefault()
+  filtrarUsuarios.onchange = e => {
+    inputUsuario = e.srcElement.value;
+    return inputUsuario
+  }
+}
+
+
+
+const filtrarUsuarios = document.querySelector('#buscar')
 
 // filtrarUsuarios.onchange = e => {
 //   inputUsuario = e.srcElement.value;
 //   return inputUsuario
 // }
 
-// console.log(inputUsuario)
+console.log(inputUsuario)
 
