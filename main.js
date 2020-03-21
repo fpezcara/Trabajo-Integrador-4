@@ -1,4 +1,5 @@
-  fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`)
+  const mostrarTablaDeUsuarios = () => {
+    fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`)
   .then(data => data.json())
   .then(respuesta => {
     const baseDeDatosContactos = document.querySelector("#informacion-contactos");
@@ -27,14 +28,12 @@
     baseDeDatosContactos.innerHTML = mostrarUsuarios;
     
   });
-
+  }
 
 const addEmployeeButton = document.querySelector("#add-employee");
-const modalAddEmployee = document.querySelector(
-  "#modal-add-employee-container"
-);
+const modalAddEmployee = document.querySelector("#modal-add-employee-container");
 
-const abrirAddEmployee = (addEmployeeButton.onclick = () => {
+addEmployeeButton.onclick = () => {
   modalAddEmployee.classList.remove("nomostrar");
   modalAddEmployee.innerHTML = `
     <div id="modal-add-employee">
@@ -101,9 +100,8 @@ const abrirAddEmployee = (addEmployeeButton.onclick = () => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-      modalAddEmployee.classList.add("nomostrar") 
-        // mostrarUsuarios()     
+       modalAddEmployee.classList.add("nomostrar") 
+       mostrarTablaDeUsuarios()
     })
   });
 
@@ -119,7 +117,7 @@ const abrirAddEmployee = (addEmployeeButton.onclick = () => {
       addNewUser()
       }
   };
-});
+};
 
 const formFiltrar = document.forms[0]
 const submit = formFiltrar.elements[0];
