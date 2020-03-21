@@ -3,9 +3,9 @@
   .then(respuesta => {
     const baseDeDatosContactos = document.querySelector("#informacion-contactos");
     console.log(respuesta)
-    let datosUsuarios = ``
+    
     const mostrarUsuarios = respuesta.map(usuario => {
-      return datosUsuarios += `
+      return  `
       <tr id="detalle-usuarios">
         <td><input type="checkbox"></td>
         <td>${usuario.fullname}</td>
@@ -103,7 +103,7 @@ const abrirAddEmployee = (addEmployeeButton.onclick = () => {
     .then(data => {
       console.log(data)
       modalAddEmployee.classList.add("nomostrar") 
-      // mostrarUsuarios()     
+        // mostrarUsuarios()     
     })
   });
 
@@ -123,24 +123,42 @@ const abrirAddEmployee = (addEmployeeButton.onclick = () => {
 
 const formFiltrar = document.forms[0]
 const submit = formFiltrar.elements[0];
-let inputUsuario = '';
 
 formFiltrar.onsubmit = e => {
   e.preventDefault()
-  filtrarUsuarios.onchange = e => {
-    inputUsuario = e.srcElement.value;
-    return inputUsuario
+  filtrarUsuarios(submit.value)
   }
+
+const filtrarUsuarios = dato => {
+  fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users?search=${dato}`)
+  .then(data => data.json())
+  .then(respuesta => {
+    const baseDeDatosContactos = document.querySelector("#informacion-contactos");
+        
+    const mostrarUsuarios = respuesta.map(usuario => {
+      return  `
+      <tr id="detalle-usuarios">
+        <td><input type="checkbox"></td>
+        <td>${usuario.fullname}</td>
+        <td>${usuario.email}</td>
+        <td>${usuario.address}</td>
+        <td>${usuario.phone}</td>
+        <td>
+            <a href="" class="edit">
+                <i class="material-icons" title="Edit">&#xE254;</i>
+            </a>
+            <a href="" class="delete">
+                <i class="material-icons" title="Delete">&#xE872;</i>
+            </a>
+        </td> 
+      </tr>
+        `;
+    });
+
+    baseDeDatosContactos.innerHTML = mostrarUsuarios;
+    
+  });
 }
 
 
-
-const filtrarUsuarios = document.querySelector('#buscar')
-
-// filtrarUsuarios.onchange = e => {
-//   inputUsuario = e.srcElement.value;
-//   return inputUsuario
-// }
-
-console.log(inputUsuario)
 
