@@ -1,12 +1,14 @@
-  const mostrarTablaDeUsuarios = () => {
-    fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`)
-  .then(data => data.json())
-  .then(respuesta => {
-    const baseDeDatosContactos = document.querySelector("#informacion-contactos");
-    console.log(respuesta)
-    
-    const mostrarUsuarios = respuesta.map(usuario => {
-      return  `
+const mostrarTablaDeUsuarios = () => {
+  fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`)
+    .then(data => data.json())
+    .then(respuesta => {
+      const baseDeDatosContactos = document.querySelector(
+        "#informacion-contactos"
+      );
+      console.log(respuesta);
+
+      const mostrarUsuarios = respuesta.map(usuario => {
+        return `
       <tr id="detalle-usuarios">
         <td><input type="checkbox"></td>
         <td>${usuario.fullname}</td>
@@ -14,24 +16,28 @@
         <td>${usuario.address}</td>
         <td>${usuario.phone}</td>
         <td>
-            <a href="" class="edit">
-                <i class="material-icons" title="Edit">&#xE254;</i>
-            </a>
-            <a href="" class="delete">
-                <i class="material-icons" title="Delete">&#xE872;</i>
-            </a>
+        <i class="material-icons edit" title="Edit">&#xE254;</i>
+           
+            
+           
+        <i class="material-icons delete" title="Delete">&#xE872;</i>
+   
+            </td> 
         </td> 
       </tr>
         `;
-    });
+      });
 
-    baseDeDatosContactos.innerHTML = mostrarUsuarios;
-    
-  });
-  }
+      baseDeDatosContactos.innerHTML = mostrarUsuarios;
+    });
+};
+
+mostrarTablaDeUsuarios();
 
 const addEmployeeButton = document.querySelector("#add-employee");
-const modalAddEmployee = document.querySelector("#modal-add-employee-container");
+const modalAddEmployee = document.querySelector(
+  "#modal-add-employee-container"
+);
 
 addEmployeeButton.onclick = () => {
   modalAddEmployee.classList.remove("nomostrar");
@@ -76,8 +82,6 @@ addEmployeeButton.onclick = () => {
   const addressTextarea = document.querySelector("#textarea-address");
   const phoneInput = document.querySelector("#input-phone");
 
- 
-
   const form = document.querySelector("#formulario-add-employee");
   const addNewUser = (form.onsubmit = e => {
     e.preventDefault();
@@ -86,8 +90,8 @@ addEmployeeButton.onclick = () => {
     const addressAdd = addressTextarea.value;
     const phoneAdd = phoneInput.value;
 
-    const addToDataBase = fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users', {
-      method: 'POST',
+    const addToDataBase = fetch("https://tp-js-2-api-wjfqxquokl.now.sh/users", {
+      method: "POST",
       body: JSON.stringify({
         fullname: `${nombreAdd}`,
         email: `${emailAdd}`,
@@ -95,14 +99,14 @@ addEmployeeButton.onclick = () => {
         phone: `${phoneAdd}`
       }),
       headers: {
-        'Content-Type': "application/json"
+        "Content-Type": "application/json"
       }
     })
-    .then(res => res.json())
-    .then(data => {
-       modalAddEmployee.classList.add("nomostrar") 
-       mostrarTablaDeUsuarios()
-    })
+      .then(res => res.json())
+      .then(data => {
+        modalAddEmployee.classList.add("nomostrar");
+        mostrarTablaDeUsuarios();
+      });
   });
 
   closeModal.onclick = () => {
@@ -114,27 +118,29 @@ addEmployeeButton.onclick = () => {
   };
   addButton.onkeypress = e => {
     if (e.keyCode == 13) {
-      addNewUser()
-      }
+      addNewUser();
+    }
   };
 };
 
-const formFiltrar = document.forms[0]
+const formFiltrar = document.forms[0];
 const submit = formFiltrar.elements[0];
 
 formFiltrar.onsubmit = e => {
-  e.preventDefault()
-  filtrarUsuarios(submit.value)
-  }
+  e.preventDefault();
+  filtrarUsuarios(submit.value);
+};
 
 const filtrarUsuarios = dato => {
   fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users?search=${dato}`)
-  .then(data => data.json())
-  .then(respuesta => {
-    const baseDeDatosContactos = document.querySelector("#informacion-contactos");
-        
-    const mostrarUsuarios = respuesta.map(usuario => {
-      return  `
+    .then(data => data.json())
+    .then(respuesta => {
+      const baseDeDatosContactos = document.querySelector(
+        "#informacion-contactos"
+      );
+
+      const mostrarUsuarios = respuesta.map(usuario => {
+        return `
       <tr id="detalle-usuarios">
         <td><input type="checkbox"></td>
         <td>${usuario.fullname}</td>
@@ -142,21 +148,50 @@ const filtrarUsuarios = dato => {
         <td>${usuario.address}</td>
         <td>${usuario.phone}</td>
         <td>
-            <a href="" class="edit">
-                <i class="material-icons" title="Edit">&#xE254;</i>
-            </a>
-            <a href="" class="delete">
-                <i class="material-icons" title="Delete">&#xE872;</i>
-            </a>
+            <div class="edit">
+              <i class="material-icons" title="Edit">&#xE254;</i>
+             </div>
+             <div id="delete">         
+              <i class="material-icons" title="Delete">&#xE872;</i>
+              </div> 
         </td> 
       </tr>
         `;
-    });
+      });
 
-    baseDeDatosContactos.innerHTML = mostrarUsuarios;
-    
-  });
+      baseDeDatosContactos.innerHTML = mostrarUsuarios;
+    });
+};
+
+const deleteIcon = document.getElementsByClassName("delete");
+console.log(deleteIcon);
+
+for (let i = 0; i < deleteIcon.length; i++) {
+  deleteIcon[i].onclick = () => {
+    console.log("hola");
+  };
 }
 
+// console.log(usuariosEliminados)
 
+// const deleteUser = userToDelete => {
+//   fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/${userToDelete}`, {
+//   method: 'DELETE',
+//   headers: {
+//     'Content-Type': "application/json"
+//   }
+// })
+//   .then(res => res.json())
+//   .then(data => {
+//     console.log(data);
+//   });
+// }
 
+//  <a href="" class="edit">
+//                 <i class="material-icons" title="Edit">&#xE254;</i>
+//             </a>
+
+//             <a href="" class="delete">
+//                 <i class="material-icons delete-icon" title="Delete">&#xE872;</i>
+//             </a>
+//                     </td>
