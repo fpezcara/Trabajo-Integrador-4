@@ -16,13 +16,10 @@ const mostrarTablaDeUsuarios = () => {
         <td>${usuario.address}</td>
         <td>${usuario.phone}</td>
         <td>
-        <i class="material-icons edit" title="Edit">&#xE254;</i>
-           
-            
-           
-        <i class="material-icons delete" title="Delete">&#xE872;</i>
-   
-            </td> 
+        
+         <i class="material-icons edit" title="Edit">&#xE254;</i>
+         <i class="material-icons delete" title="Delete">&#xE872;</i>
+        
         </td> 
       </tr>
         `;
@@ -148,13 +145,9 @@ const filtrarUsuarios = dato => {
         <td>${usuario.address}</td>
         <td>${usuario.phone}</td>
         <td>
-            <div class="edit">
-              <i class="material-icons" title="Edit">&#xE254;</i>
-             </div>
-             <div id="delete">         
-              <i class="material-icons" title="Delete">&#xE872;</i>
-              </div> 
-        </td> 
+        <i class="material-icons edit" title="Edit">&#xE254;</i>
+        <i class="material-icons delete" title="Delete">&#xE872;</i>
+        </td>
       </tr>
         `;
       });
@@ -167,11 +160,16 @@ const deleteIcon = document.getElementsByClassName("delete");
 console.log(deleteIcon);
 
 for (let i = 0; i < deleteIcon.length; i++) {
+  console.log(deleteIcon[i])
   deleteIcon[i].onclick = () => {
-    console.log("hola");
+    eliminarUsuario()
   };
 }
 
+
+const eliminarUsuario = () => {
+console.log("hola")
+}
 // console.log(usuariosEliminados)
 
 // const deleteUser = userToDelete => {
