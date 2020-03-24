@@ -18,6 +18,10 @@ body {
     margin: 0;
 }
 
+#header {
+    margin: 10px;
+}
+
 #header h2 {
     padding: 20px;
     margin: 0;
@@ -29,7 +33,7 @@ body {
 
 #add-employee {
     position: absolute;
-    top: 15px;
+    top: 28px;
     right: 22px;
     width: 200px;
     height: 35px;
@@ -258,7 +262,7 @@ border-top: 1px solid #ddd;
 .submit-add-employee {
     color: #fff;
     background-color: #5cb85c;
-    border-color: #4cae4c;
+    border-color: #131413;
     margin-left: 8px;
 
 }
@@ -267,5 +271,22 @@ border-top: 1px solid #ddd;
     display: none;
   }
 
-
+.delete-button { 
+    border-radius: 2px;
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    margin-left: 8px;
+}
  
+#modal-delete-employee {
+    width:400px;
+    height: auto;
+    position: fixed;
+    top: 40px;
+    left: 400px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    color: #435d7d;
+}

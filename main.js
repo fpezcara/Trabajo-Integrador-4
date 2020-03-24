@@ -18,7 +18,7 @@ const mostrarTablaDeUsuarios = () => {
         <td>
         
          <i class="material-icons edit" title="Edit">&#xE254;</i>
-         <i class="material-icons delete" title="Delete">&#xE872;</i>
+         <i class="material-icons delete" id="${usuario.id}" title="Delete">&#xE872;</i>
         
         </td> 
       </tr>
@@ -26,6 +26,16 @@ const mostrarTablaDeUsuarios = () => {
       });
 
       baseDeDatosContactos.innerHTML = mostrarUsuarios;
+
+      const deleteIcon = document.getElementsByClassName("delete");
+
+      for (let i = 0; i < deleteIcon.length; i++) {
+        
+        deleteIcon[i].onclick = e => {
+          let userToDelete = e.target.id;
+          deleteUser(userToDelete);
+           };
+      }
     });
 };
 
@@ -156,40 +166,90 @@ const filtrarUsuarios = dato => {
     });
 };
 
-const deleteIcon = document.getElementsByClassName("delete");
-console.log(deleteIcon);
 
-for (let i = 0; i < deleteIcon.length; i++) {
-  console.log(deleteIcon[i])
-  deleteIcon[i].onclick = () => {
-    eliminarUsuario()
+const deleteUser = () => {
+  const modalDelete = document.querySelector(
+    "#modal-delete-employee-container"
+  );
+  
+  fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`)
+    .then(data => data.json())
+    .then(respuesta => {
+
+  modalDelete.classList.remove("nomostrar");
+  
+  const deleteConfirmationModal = respuesta.map(user => { 
+    return `
+    <div id="modal-delete-employee" class="no mostrar">
+  <div>
+  <h4>Delete Employee</h4>
+  <button id="close"> ×
+  </button>
+</div>
+<div id="modal-delete-body">
+  <p>
+  Are you sure you want to delete these Records?
+
+  This action cannot be undone.
+</p>
+</div>
+<div id="footer-modal-add-employee">
+        <input type="button" class="button button-cancel" value="Cancel">
+        <input type="submit" id="${user.id}" class="button delete-button" value="Delete">
+      </div
+</div>
+
+`
+});
+modalDelete.innerHTML = deleteConfirmationModal;
+  const closeButton = document.querySelector("#close");
+  const closeModal = document.querySelector(".button-cancel");
+  const deleteConfirmation = document.querySelector(".delete-button");
+  console.log(deleteConfirmation)
+  closeModal.onclick = () => {
+    modalDelete.classList.add("nomostrar");
   };
-}
+
+  closeButton.onclick = () => {
+    modalDelete.classList.add("nomostrar");
+  };
+
+  deleteConfirmation.onclick = userToDelete => {
+    console.log(userToDelete)
+    fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/${userToDelete}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        console.log("hola")
+      })
+  }
+  
+})
+};
 
 
-const eliminarUsuario = () => {
-console.log("hola")
-}
-// console.log(usuariosEliminados)
 
-// const deleteUser = userToDelete => {
-//   fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/${userToDelete}`, {
-//   method: 'DELETE',
-//   headers: {
-//     'Content-Type': "application/json"
-//   }
-// })
-//   .then(res => res.json())
-//   .then(data => {
-//     console.log(data);
-//   });
-// }
 
-//  <a href="" class="edit">
-//                 <i class="material-icons" title="Edit">&#xE254;</i>
-//             </a>
 
-//             <a href="" class="delete">
-//                 <i class="material-icons delete-icon" title="Delete">&#xE872;</i>
-//             </a>
-//                     </td>
+//  const mostrarUsuarios = respuesta.map(usuario => {
+//         return `
+//       <tr id="detalle-usuarios">
+//         <td><input type="checkbox"></td>
+//         <td>${usuario.fullname}</td>
+//         <td>${usuario.email}</td>
+//         <td>${usuario.address}</td>
+//         <td>${usuario.phone}</td>
+//         <td>
+//         <i class="material-icons edit" title="Edit">&#xE254;</i>
+//         <i class="material-icons delete" title="Delete">&#xE872;</i>
+//         </td>
+//       </tr>
+//         `;
+//       });
+
+//       baseDeDatosContactos.innerHTML = mostrarUsuarios;
