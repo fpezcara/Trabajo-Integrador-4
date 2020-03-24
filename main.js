@@ -167,11 +167,11 @@ const filtrarUsuarios = dato => {
 };
 
 
-const deleteUser = () => {
+const deleteUser = (user) => {
   const modalDelete = document.querySelector(
     "#modal-delete-employee-container"
   );
-  
+  console.log(user)
   fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`)
     .then(data => data.json())
     .then(respuesta => {
@@ -179,6 +179,7 @@ const deleteUser = () => {
   modalDelete.classList.remove("nomostrar");
   
   const deleteConfirmationModal = respuesta.map(user => { 
+    const userId = user.id
     return `
     <div id="modal-delete-employee" class="no mostrar">
   <div>
@@ -195,7 +196,7 @@ const deleteUser = () => {
 </div>
 <div id="footer-modal-add-employee">
         <input type="button" class="button button-cancel" value="Cancel">
-        <input type="submit" id="${user.id}" class="button delete-button" value="Delete">
+        <input type="submit" id="${userId}" class="button delete-button" value="Delete">
       </div
 </div>
 
@@ -214,9 +215,9 @@ modalDelete.innerHTML = deleteConfirmationModal;
     modalDelete.classList.add("nomostrar");
   };
 
-  deleteConfirmation.onclick = userToDelete => {
-    console.log(userToDelete)
-    fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/${userToDelete}`, {
+  deleteConfirmation.onclick = () => {
+    console.log(userId)
+    fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/${userId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
