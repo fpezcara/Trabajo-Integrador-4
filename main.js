@@ -30,11 +30,10 @@ const mostrarTablaDeUsuarios = () => {
       const deleteIcon = document.getElementsByClassName("delete");
 
       for (let i = 0; i < deleteIcon.length; i++) {
-        
         deleteIcon[i].onclick = e => {
           let userToDelete = e.target.id;
           deleteUser(userToDelete);
-           };
+        };
       }
     });
 };
@@ -166,25 +165,22 @@ const filtrarUsuarios = dato => {
     });
 };
 
-
-const deleteUser = (user) => {
+const deleteUser = user => {
   const modalDelete = document.querySelector(
     "#modal-delete-employee-container"
   );
-  console.log(user)
+  console.log(user);
   fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`)
     .then(data => data.json())
     .then(respuesta => {
+      modalDelete.classList.remove("nomostrar");
 
-  modalDelete.classList.remove("nomostrar");
-  
-  const deleteConfirmationModal = respuesta.map(user => { 
-    const userId = user.id
-    return `
+      const deleteConfirmationModal = respuesta.map(user => {
+        return `
     <div id="modal-delete-employee" class="no mostrar">
   <div>
   <h4>Delete Employee</h4>
-  <button id="close"> ×
+  <button id="close" class="close-modal-delete"> ×
   </button>
 </div>
 <div id="modal-delete-body">
@@ -196,61 +192,44 @@ const deleteUser = (user) => {
 </div>
 <div id="footer-modal-add-employee">
         <input type="button" class="button button-cancel" value="Cancel">
-        <input type="submit" id="${userId}" class="button delete-button" value="Delete">
+        <input type="submit" id="${user.id}" class="button delete-button" value="Delete">
       </div
 </div>
 
-`
-});
-modalDelete.innerHTML = deleteConfirmationModal;
-  const closeButton = document.querySelector("#close");
-  const closeModal = document.querySelector(".button-cancel");
-  const deleteConfirmation = document.querySelector(".delete-button");
-  console.log(deleteConfirmation)
-  closeModal.onclick = () => {
-    modalDelete.classList.add("nomostrar");
-  };
+`;
+      });
+      modalDelete.innerHTML = deleteConfirmationModal;
 
-  closeButton.onclick = () => {
-    modalDelete.classList.add("nomostrar");
-  };
+      const closeButton = document.getElementsByClassName("close-modal-delete");
+      const closeModal = document.getElementsByClassName("button-cancel");
+      const deleteConfirmation = document.getElementsByClassName("delete-button");
+      console.log(deleteConfirmation);
 
-  deleteConfirmation.onclick = () => {
-    console.log(userId)
-    fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/${userId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
+      for (let i = 0; i < deleteConfirmation.length; i++) {
+        deleteConfirmation[i].onclick = () => {
+          console.log(user);
+          console.log("esto funciona");
+          fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/${user}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+            .then(res => res.json())
+            .then(data => {
+              mostrarTablaDeUsuarios();
+              modalDelete.classList.add("nomostrar");
+            });
+        };
+
+        closeModal[i].onclick = () => {
+          modalDelete.classList.add("nomostrar");
+        };
+        console.log(closeModal)
+        closeButton[i].onclick = () => {
+          modalDelete.classList.add("nomostrar");
+        };
       }
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        console.log("hola")
-      })
-  }
-  
-})
+    });
 };
 
-
-
-
-
-//  const mostrarUsuarios = respuesta.map(usuario => {
-//         return `
-//       <tr id="detalle-usuarios">
-//         <td><input type="checkbox"></td>
-//         <td>${usuario.fullname}</td>
-//         <td>${usuario.email}</td>
-//         <td>${usuario.address}</td>
-//         <td>${usuario.phone}</td>
-//         <td>
-//         <i class="material-icons edit" title="Edit">&#xE254;</i>
-//         <i class="material-icons delete" title="Delete">&#xE872;</i>
-//         </td>
-//       </tr>
-//         `;
-//       });
-
-//       baseDeDatosContactos.innerHTML = mostrarUsuarios;
